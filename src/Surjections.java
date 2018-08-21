@@ -1,4 +1,4 @@
-// Surjections
+// surjections
 // Jerred Shepherd
 
 import java.io.File;
