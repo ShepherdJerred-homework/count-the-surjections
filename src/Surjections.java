@@ -38,37 +38,50 @@ public class Surjections {
     }
 
     private static long solve(long m, long n) {
-        long count;
-
         if (n == 1) {
-            count = 1;
+            return 1;
         } else if (m < n) {
-            count = 0;
+            return 0;
         } else if (m == n) {
-            count = 1;
-            for (int i = 0; i < m -1; i++) {
-                count *= i;
-            }
+            return factorial(m);
         } else {
-            count = sum(m, n);
+            return exponent(n, m) - sum(m, n);
         }
-
-        return count;
     }
 
     private static long sum(long m, long n) {
-        int sum = 0;
+        long sum = 0;
         for (int i = 1; i <= n - 1; i++) {
-            sum += math(n, i) * solve(m, i);
+            sum += combination(n, i) * solve(m, i);
         }
         return sum;
     }
 
-    private static long math(long n, long i) {
+    private static long combination(long n, long i) {
         if (i == 0 || n == 0 || i == n) {
             return 1;
         } else {
-            return math(n - 1, i - 1) + math(n - 1, i);
+            return combination(n - 1, i - 1) + combination(n - 1, i);
         }
+    }
+
+    private static long exponent(long number, long power) {
+        if (power == 0) {
+            return 1;
+        } else {
+            long exponent = 1;
+            for (int i = 1; i < power + 1; i++) {
+                exponent *= number;
+            }
+            return exponent;
+        }
+    }
+
+    private static long factorial(long l) {
+        long factorial = 1;
+        for (int i = 1; i < l + 1; i++) {
+            factorial *= i;
+        }
+        return factorial;
     }
 }
